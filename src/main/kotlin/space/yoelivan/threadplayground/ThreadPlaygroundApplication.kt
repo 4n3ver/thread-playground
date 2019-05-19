@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class ThreadPlaygroundApplication
 
 fun main(args: Array<String>) {
-	runApplication<ThreadPlaygroundApplication>(*args)
+	runApplication<ThreadPlaygroundApplication>(*args).close()
 }

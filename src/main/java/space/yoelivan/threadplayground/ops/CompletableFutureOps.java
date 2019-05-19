@@ -1,16 +1,20 @@
 package space.yoelivan.threadplayground.ops;
 
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import space.yoelivan.threadplayground.BoundedExecutorServiceKt;
 import space.yoelivan.threadplayground.FutureCollectors;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
 import java.util.stream.Collectors;
 
 @Component
 class CompletableFutureOps extends Ops {
+    @Autowired
+    private ExecutorService commonBoundedPool;
+
     @NotNull
     @Override
     public List<Long> process(@NotNull List<Integer> arg, long start) {
@@ -24,7 +28,7 @@ class CompletableFutureOps extends Ops {
     private CompletableFuture<Long> asyncCall(Integer i, Long start) {
         return CompletableFuture.supplyAsync(
                 () -> blockingCall(i, start),
-                BoundedExecutorServiceKt.getCommonBoundedPool()
+                commonBoundedPool
         );
     }
 }

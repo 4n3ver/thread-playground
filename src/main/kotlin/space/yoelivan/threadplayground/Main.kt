@@ -3,6 +3,7 @@ package space.yoelivan.threadplayground
 import org.apache.logging.log4j.LogManager
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
+import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.stereotype.Component
 import space.yoelivan.threadplayground.ops.Ops
 
@@ -37,6 +38,5 @@ class Main @Autowired constructor(private val ops: List<Ops>) : CommandLineRunne
 
     override fun run(vararg args: String?) {
         ops.forEach { run(it) }
-        commonBoundedPool.shutdown()
     }
 }
