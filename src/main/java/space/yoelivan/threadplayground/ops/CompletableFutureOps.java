@@ -2,6 +2,7 @@ package space.yoelivan.threadplayground.ops;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import space.yoelivan.threadplayground.FutureCollectors;
 
@@ -12,8 +13,12 @@ import java.util.stream.Collectors;
 
 @Component
 class CompletableFutureOps extends Ops {
+    private final ExecutorService commonBoundedPool;
+
     @Autowired
-    private ExecutorService commonBoundedPool;
+    public CompletableFutureOps(@Qualifier("commonBoundedPool") ExecutorService commonBoundedPool) {
+        this.commonBoundedPool = commonBoundedPool;
+    }
 
     @NotNull
     @Override

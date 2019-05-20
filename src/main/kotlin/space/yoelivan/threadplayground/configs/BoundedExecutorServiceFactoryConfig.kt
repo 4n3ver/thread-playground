@@ -11,7 +11,7 @@ import java.util.concurrent.ThreadPoolExecutor.CallerRunsPolicy
 import javax.annotation.PostConstruct
 
 @Configuration
-class BoundedExecutorServiceConfig {
+class BoundedExecutorServiceFactoryConfig {
     companion object {
         private val log = LogManager.getLogger()
 
@@ -22,7 +22,7 @@ class BoundedExecutorServiceConfig {
 
     @Lazy
     @Bean
-    fun commonBoundedPoolFactory(): ThreadPoolExecutorFactoryBean {
+    fun commonBoundedPool(): ThreadPoolExecutorFactoryBean {
         log.info("Creating ExecutorService, CORE_POOL_SIZE: $MIN_POOL_SIZE MAX_POOL_SIZE: $MAX_POOL_SIZE")
         val factoryBean = ThreadPoolExecutorFactoryBean()
         factoryBean.setCorePoolSize(MIN_POOL_SIZE)

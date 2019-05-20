@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner
 import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.stereotype.Component
 import space.yoelivan.threadplayground.ops.Ops
+import java.lang.Math.ceil
 
 @Component
 class Main @Autowired constructor(private val ops: List<Ops>) : CommandLineRunner {
@@ -15,9 +16,8 @@ class Main @Autowired constructor(private val ops: List<Ops>) : CommandLineRunne
 
         private fun calcPercentile(percentile: Int, list: List<Long>): Long {
             val x = percentile * list.size
-            val index = x / 100
-            return if (x % 100 == 0) list[index - 1]
-            else (list[index - 1] + list[index] / 2)
+            val index = ceil(x / 100.0).toInt() - 1
+            return list[index]
         }
 
         private fun run(ops: Ops) {
