@@ -15,6 +15,7 @@ import java.util.stream.Stream;
 public class FutureCollectors {
     public static <T, E extends CompletableFuture<T>>
     Collector<E, List<E>, CompletableFuture<Stream<T>>> toFutureList() {
+        //noinspection unchecked
         return new CompletableFutureListCollector();
     }
 
